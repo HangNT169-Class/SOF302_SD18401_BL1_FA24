@@ -12,7 +12,7 @@
         <button type="submit">Search</button>
     </form>
     <br/>
-    <button><a href="">Add Student</a></button>
+    <button><a href="/sinh-vien/view-add">Add Student</a></button>
     <tr>
         <th>STT</th>
         <th>MSSV</th>
@@ -27,7 +27,7 @@
     <c:forEach items="${lists}" var="sv" varStatus="i">
         <tr>
             <td>${i.index}</td>
-            <td>${sv.masv}</td>
+            <td>${sv.ma}</td>
             <td>${sv.ten}</td>
             <td>${sv.diaChi}</td>
             <td>${sv.tuoi}</td>
@@ -36,9 +36,9 @@
                 <%--C1: Giong J4: ? => lay ra controller: @RequestParam
                     C2: J5: /${giatri} => Lay ra controller : PathVariable
                  --%>
-                <a href="/sinh-vien/remove/${sv.masv}">Delete</a>
-                <a href="/sinh-vien/detail/${sv.masv}">Detail</a>
-                <a href="/sinh-vien/view-update/${sv.masv}">Update</a>
+                <a href="/sinh-vien/remove/${sv.ma}">Delete</a>
+                <a href="/sinh-vien/detail?id=${sv.ma}">Detail</a>
+                <a href="/sinh-vien/view-update/${sv.ma}">Update</a>
             </td>
         </tr>
     </c:forEach>

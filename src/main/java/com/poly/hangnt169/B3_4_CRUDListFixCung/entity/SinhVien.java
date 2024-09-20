@@ -1,6 +1,7 @@
 package com.poly.hangnt169.B3_4_CRUDListFixCung.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class SinhVien {
 
-    private String masv;
+    private String ma;
 
     private String ten;
 
