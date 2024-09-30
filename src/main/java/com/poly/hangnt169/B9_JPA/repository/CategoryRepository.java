@@ -2,8 +2,6 @@ package com.poly.hangnt169.B9_JPA.repository;
 
 import com.poly.hangnt169.B9_JPA.entity.Category1;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,7 +18,7 @@ public interface CategoryRepository extends JpaRepository<Category1, Long> {
     // Tu custom lai cau lenh SQL
     // Tat ca truy van => Truy van tren thuc the (@entity)
     // C1: Raw SQL ( dua vao ten ham de truy van dieu kien)
-    Category1 findByCategoryCodeOOrderById(String categoryCode);
+//    Category1 findByCategoryCodeOOrderById(String categoryCode);
 
     // Neu ten dieu kien cua cau truy van cang dai => ten ham cang dai
     // C2: JPQL(JPA Query Language) => TRUY VAN TREN THUC THE
@@ -29,11 +27,11 @@ public interface CategoryRepository extends JpaRepository<Category1, Long> {
 //    @Query("SELECT c FROM Category1 c WHERE c.categoryName LIKE ?2 AND c.categoryCode LIKE ?1")
 //    Category1 searchName(String categoryCode, String categoryName);
     // 2. :ten bien => @Param
-    @Query("SELECT c FROM Category1 c WHERE c.categoryName LIKE :name AND c.categoryCode LIKE :code")
-    Category1 searchName(@Param("code") String categoryCode, @Param("name") String categoryName);
-
-    // C3: native query (interface de hung doi tuong) => TRUY VAN TREN SQL (*)
-    @Query(value = "cau sql", nativeQuery = true)
-    Category1 search1(String name);
-    // FINISH CRUD CATEGORY (THEM,SUA,XOA)
+//    @Query("SELECT c FROM Category1 c WHERE c.categoryName LIKE :name AND c.categoryCode LIKE :code")
+//    Category1 searchName(@Param("code") String categoryCode, @Param("name") String categoryName);
+//
+//    // C3: native query (interface de hung doi tuong) => TRUY VAN TREN SQL (*)
+//    @Query(value = "cau sql", nativeQuery = true)
+//    Category1 search1(String name);
+//    // FINISH CRUD CATEGORY (THEM,SUA,XOA)
 }
