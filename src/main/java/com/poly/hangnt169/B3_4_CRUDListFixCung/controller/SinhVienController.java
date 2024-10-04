@@ -2,10 +2,13 @@ package com.poly.hangnt169.B3_4_CRUDListFixCung.controller;
 
 import com.poly.hangnt169.B3_4_CRUDListFixCung.entity.SinhVien;
 import com.poly.hangnt169.B3_4_CRUDListFixCung.service.SinhVienService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,26 +47,41 @@ public class SinhVienController {
     }
 
     @GetMapping("/sinh-vien/view-add")
-    public String viewaddSinhVien() {
+    public String viewaddSinhVien(Model model) {
+        model.addAttribute("sv1", new SinhVien());
+        // update => sv dang chon (findByID)
+        // add => doi tuong moi new
         return "buoi3/add-sinh-vien";
     }
 
     @PostMapping("/sinh-vien/add")
-    public String addSinhVien(@RequestParam("mssv") String mssv1,
-                              @RequestParam("ten") String ten1,
-                              @RequestParam("tuoi") String tuoi1,
-                              @RequestParam("diaChi") String diachi1,
-                              @RequestParam("gioiTinh")String gioiTinh1
-                              ) {
-        SinhVien sv = SinhVien.builder()
-                .ma(mssv1)
-                .ten(ten1)
-                .gioiTinh(Boolean.valueOf(gioiTinh1))
-                .tuoi(Integer.valueOf(tuoi1))
-                .diaChi(diachi1)
-                .build();
+    // Validate cho doi tuong nao => them @Valid truoc doi tuong day
+    public String addSinhVien(@Valid @ModelAttribute("sv1")SinhVien sv,
+                              BindingResult result){
+        // check xem co loi hay k
+        if(result.hasErrors()){
+            return "buoi3/add-sinh-vien";
+        }
         sinhVienService.addSinhVien(sv);
         return "redirect:/sinh-vien/hien-thi";
     }
+
+//    @PostMapping("/sinh-vien/add")
+//    public String addSinhVien(@RequestParam("mssv") String mssv1,
+//                              @RequestParam("ten") String ten1,
+//                              @RequestParam("tuoi") String tuoi1,
+//                              @RequestParam("diaChi") String diachi1,
+//                              @RequestParam("gioiTinh")String gioiTinh1
+//                              ) {
+//        SinhVien sv = SinhVien.builder()
+//                .ma(mssv1)
+//                .ten(ten1)
+//                .gioiTinh(Boolean.valueOf(gioiTinh1))
+//                .tuoi(Integer.valueOf(tuoi1))
+//                .diaChi(diachi1)
+//                .build();
+//        sinhVienService.addSinhVien(sv);
+//        return "redirect:/sinh-vien/hien-thi";
+//    }
 
 }
